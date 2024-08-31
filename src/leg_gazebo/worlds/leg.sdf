@@ -1,0 +1,126 @@
+<?xml version="1.0" ?>
+<sdf version="1.8">
+  <world name="demo">
+    <plugin
+      filename="gz-sim-physics-system"
+      name="gz::sim::systems::Physics">
+    </plugin>
+    <plugin
+      filename="gz-sim-scene-broadcaster-system"
+      name="gz::sim::systems::SceneBroadcaster">
+    </plugin>
+    <plugin
+      filename="gz-sim-user-commands-system"
+      name="gz::sim::systems::UserCommands">
+    </plugin>
+
+    <!-- <gravity>0 0 0</gravity> -->
+
+    <plugin
+      filename="ignition-gazebo-imu-system"
+      name="gz::sim::systems::Imu">
+    </plugin>
+
+    <plugin
+      filename="ignition-gazebo-contact-system"
+      name="gz::sim::systems::Contact">
+    </plugin>
+
+    <light name="sun" type="directional">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <ambient>0.8 0.8 0.8 1</ambient>
+            <diffuse>0.8 0.8 0.8 1</diffuse>
+            <specular>0.8 0.8 0.8 1</specular>
+          </material>
+        </visual>
+      </link>
+    </model>
+
+    <model name="biped_robot">
+      <self_collide>true</self_collide>
+      <pose>0 0 0.862 0 0 0</pose>
+      <include merge="true">
+        <uri>package://leg_description/urdf/leg.sdf</uri>
+      </include>
+
+      <plugin
+        filename="gz-sim-joint-state-publisher-system"
+        name="gz::sim::systems::JointStatePublisher">
+        <topic>joint_states</topic>
+        <joint_name>R_hip_joint</joint_name>
+        <joint_name>R_hip2_joint</joint_name>
+        <joint_name>R_thigh_joint</joint_name>
+        <joint_name>R_calf_joint</joint_name>
+        <joint_name>R_toe_joint</joint_name>
+        <joint_name>L_hip_joint</joint_name>
+        <joint_name>L_hip2_joint</joint_name>
+        <joint_name>L_thigh_joint</joint_name>
+        <joint_name>L_calf_joint</joint_name>
+        <joint_name>L_toe_joint</joint_name>
+      </plugin>
+
+      <plugin
+        filename="gz-sim-joint-state-publisher-system"
+        name="gz::sim::systems::JointStatePublisher">
+        <topic>pos_L_toe_joint_state</topic>
+        <joint_name>L_toe_joint</joint_name>
+      </plugin>
+
+      <plugin
+        filename="gz-sim-joint-state-publisher-system"
+        name="gz::sim::systems::JointStatePublisher">
+        <topic>pos_L_calf_joint_state</topic>
+        <joint_name>L_calf_joint</joint_name>
+      </plugin>
+
+      <plugin filename="ignition-gazebo-pose-publisher-system" name="gz::sim::systems::PosePublisher">
+        <publish_link_pose>false</publish_link_pose>
+        <publish_collision_pose>false</publish_collision_pose>
+        <publish_visual_pose>false</publish_visual_pose>
+        <publish_nested_model_pose>true</publish_nested_model_pose>
+      </plugin>
+
+
+
+      <!-- <plugin
+        filename="ignition-gazebo-odometry-publisher-system"
+        name="gz::sim::systems::OdometryPublisher">
+        <odom_frame>biped_hopper/odom</odom_frame>
+        <robot_base_frame>base</robot_base_frame>
+      </plugin> -->
+    
+    </model>
+
+  </world>
+</sdf>

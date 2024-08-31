@@ -1,0 +1,25 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/opt/ros/humble/include/**",
+        "/home/daniel/Workspace/ROS/leg_ws/src/leg_description/include/**",
+        "/usr/include/**",
+        "/home/daniel/Workspace/ROS/leg_ws/src/leg_controller/src/MotorController/**",
+        "/home/daniel/Workspace/ROS/leg_ws/src/leg_controller/src/FeedForwardController/**",
+        "${workspaceFolder}/src/leg_controller/include",
+        "/home/daniel/Workspace/ROS/leg_ws/install/leg_msgs/include/leg_msgs"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}
